@@ -1,67 +1,959 @@
-<!--
- * @Date: 2025-11-28 10:41:26
- * @LastEditors: chiqiulin
- * @LastEditTime: 2025-11-28 12:30:39
- * @FilePath: \chiqiulin_github_io\index.html
--->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>巴钦餐馆的卖花小孩 - Chiquilín de Bachín</title>
-    <link rel="stylesheet" href="style.css">
+    <title>开发者导航 | AI & Game Dev</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #fafbfc;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --accent-mint: #7ecfb3;
+            --accent-peach: #f5a9b8;
+            --accent-lavender: #b8a9c9;
+            --accent-sky: #89c4e1;
+            --accent-lemon: #f7dc6f;
+            --text-primary: #3d4f5f;
+            --text-secondary: #7a8b99;
+            --border-light: rgba(126, 207, 179, 0.3);
+            --shadow-soft: 0 4px 20px rgba(126, 207, 179, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', 'Quicksand', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(126, 207, 179, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(184, 169, 201, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(137, 196, 225, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            font-family: 'Quicksand', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            color: var(--accent-mint);
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .logo span {
+            color: var(--accent-lavender);
+        }
+
+        .tagline {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            letter-spacing: 4px;
+        }
+
+        .decoration {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .decoration span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .decoration span:nth-child(1) { background: var(--accent-mint); }
+        .decoration span:nth-child(2) { background: var(--accent-peach); }
+        .decoration span:nth-child(3) { background: var(--accent-lavender); }
+        .decoration span:nth-child(4) { background: var(--accent-sky); }
+
+        .section {
+            margin-bottom: 50px;
+            animation: fadeInUp 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .section:nth-child(2) { animation-delay: 0.1s; }
+        .section:nth-child(3) { animation-delay: 0.2s; }
+        .section:nth-child(4) { animation-delay: 0.3s; }
+        .section:nth-child(5) { animation-delay: 0.4s; }
+        .section:nth-child(6) { animation-delay: 0.5s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            gap: 12px;
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--accent-mint), var(--accent-sky));
+            border-radius: 12px;
+            font-size: 1.2rem;
+        }
+
+        .section-title {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 1px;
+        }
+
+        .section-count {
+            font-size: 0.8rem;
+            color: var(--accent-mint);
+            background: rgba(126, 207, 179, 0.15);
+            padding: 4px 12px;
+            border-radius: 15px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid rgba(126, 207, 179, 0.15);
+            border-radius: 16px;
+            padding: 22px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-mint);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 12px;
+        }
+
+        .card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .card-icon.ai { background: linear-gradient(135deg, #a8edea, #fed6e3); }
+        .card-icon.game { background: linear-gradient(135deg, #ffecd2, #fcb69f); }
+        .card-icon.tool { background: linear-gradient(135deg, #d299c2, #fef9d7); }
+        .card-icon.learn { background: linear-gradient(135deg, #89f7fe, #66a6ff); }
+        .card-icon.art { background: linear-gradient(135deg, #f5af19, #f12711); }
+        .card-icon.audio { background: linear-gradient(135deg, #11998e, #38ef7d); }
+        .card-icon.model { background: linear-gradient(135deg, #8e2de2, #4a00e0); }
+
+        .card-info {
+            flex: 1;
+        }
+
+        .card-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 3px;
+            color: var(--text-primary);
+        }
+
+        .card-url {
+            font-size: 0.75rem;
+            color: var(--accent-mint);
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .card-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            padding: 3px 10px;
+            border-radius: 12px;
+            background: rgba(126, 207, 179, 0.1);
+            color: var(--text-secondary);
+            transition: all 0.3s;
+        }
+
+        .card:hover .tag {
+            background: rgba(126, 207, 179, 0.2);
+            color: var(--text-primary);
+        }
+
+        .card-link {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background: rgba(126, 207, 179, 0.1);
+            color: var(--accent-mint);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .card-link:hover {
+            background: var(--accent-mint);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 20px;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .footer-text span {
+            color: var(--accent-peach);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 15px;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>巴钦餐馆的卖花小孩</h1>
-            <p class="subtitle">Chiquilín de Bachín</p>
+            <h1 class="logo">DEV<span>.NAV</span></h1>
+            <p class="tagline">AI & Game Development</p>
+            <div class="decoration">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </header>
 
-        <div class="header-music-player">
-            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=994733&auto=1&height=66"></iframe>
-        </div>
-
-        <div class="content">
-            <section class="section">
-                <h2>作品简介</h2>
-                <p>《巴钦餐馆的卖花小孩》（Chiquilín de Bachín）是阿根廷作曲家阿斯托尔·皮亚佐拉（Astor Piazzolla）创作的一首著名探戈曲，由奥拉西奥·费雷尔（Horacio Ferrer）作词。这首作品讲述了一个在布宜诺斯艾利斯巴钦餐馆卖花的小男孩的故事，通过他的视角展现了探戈世界的悲欢离合。</p>
-                <p>作品融合了传统探戈的情感深度和皮亚佐拉创新的"新探戈"风格，以其动人的旋律和深刻的歌词而闻名于世，成为探戈音乐中的经典之作。</p>
-
-                <div class="quote">
-                    探戈是悲伤的舞蹈，跳给快乐的人看。
-                </div>
-            </section>
-
-            <section class="section">
-                <h2>歌词欣赏</h2>
-                <div class="lyrics">
-                    <h3>西班牙语原版</h3>
-                    <p>Chiquilín de Bachín, con su canasta de flores<br>
-                    Va vendiendo en el bar, sueños de amores<br>
-                    A los borrachos tristes que lloran por una mujer<br>
-                    Que se fue y no regresó, que les dejó su querer</p>
-                    <p>Chiquilín de Bachín, conoce todos los dramas<br>
-                    De los hombres que en el tango, buscan consuelo y alivio<br>
-                    Él los ve llorar, los ve sufrir<br>
-                    Y con su flor, les da un poco de esperanza</p>
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">🤖</div>
+                <h2 class="section-title">AI 学习资源</h2>
+                <span class="section-count">8 网站</span>
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <a href="https://www.coursera.org" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon ai">�</div>
+                        <div class="card-info">
+                            <h3 class="card-title">Coursera</h3>
+                            <span class="card-url">coursera.org</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">全球顶尖大学课程平台，吴恩达机器学习、深度学习专项课程推荐。</p>
+                    <div class="card-tags">
+                        <span class="tag">名校课程</span>
+                        <span class="tag">证书</span>
+                        <span class="tag">免费旁听</span>
+                    </div>
                 </div>
 
-                <div class="lyrics">
-                    <h3>中文翻译</h3>
-                    <p>巴钦的卖花小孩，提着花篮<br>
-                    在酒吧里兜售，爱情的梦想<br>
-                    卖给那些悲伤的醉汉，他们为一个女人哭泣<br>
-                    她走了，不再回来，留下了他们的爱</p>
-                    <p>巴钦的卖花小孩，熟知所有的戏剧<br>
-                    那些在探戈中寻找安慰和解脱的男人<br>
-                    他看着他们哭泣，看着他们痛苦<br>
-                    用他的花，给他们一点希望</p>
+                <div class="card">
+                    <a href="https://www.bilibili.com/v/knowledge/" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon ai">📺</div>
+                        <div class="card-info">
+                            <h3 class="card-title">哔哩哔哩知识区</h3>
+                            <span class="card-url">bilibili.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">国内最活跃的视频学习社区，海量AI教程、论文解读、项目实战。</p>
+                    <div class="card-tags">
+                        <span class="tag">视频教程</span>
+                        <span class="tag">免费</span>
+                        <span class="tag">中文</span>
+                    </div>
                 </div>
-            </section>
 
-        </div>
+                <div class="card">
+                    <a href="https://www.zhihu.com/topic/19551275/hot" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon ai">💭</div>
+                        <div class="card-info">
+                            <h3 class="card-title">知乎人工智能话题</h3>
+                            <span class="card-url">zhihu.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">AI领域问答社区，行业动态、技术讨论、求职经验分享。</p>
+                    <div class="card-tags">
+                        <span class="tag">问答社区</span>
+                        <span class="tag">行业动态</span>
+                        <span class="tag">中文</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="https://www.jiqizhixin.com" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon ai">📰</div>
+                        <div class="card-info">
+                            <h3 class="card-title">机器之心</h3>
+                            <span class="card-url">jiqizhixin.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">国内领先的AI科技媒体，前沿技术报道、论文解读、产业分析。</p>
+                    <div class="card-tags">
+                        <span class="tag">科技媒体</span>
+                        <span class="tag">论文解读</span>
+                        <span class="tag">产业</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="https://www.boyuai.com" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon ai">🧒</div>
+                        <div class="card-info">
+                            <h3 class="card-title">伯禹人工智能学院</h3>
+                            <span class="card-url">boyuai.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">上海交大背景的AI学习平台，系统化课程，动手学深度学习。</p>
+                    <div class="card-tags">
+                        <span class="tag">系统课程</span>
+                        <span class="tag">实战项目</span>
+                        <span class="tag">中文</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="https://www.showmeai.tech" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon ai">📊</div>
+                        <div class="card-info">
+                            <h3 class="card-title">ShowMeAI</h3>
+                            <span class="card-url">showmeai.tech</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">AI技术知识图谱，教程汇总、工具推荐、学习路线图。</p>
+                    <div class="card-tags">
+                        <span class="tag">知识图谱</span>
+                        <span class="tag">学习路线</span>
+                        <span class="tag">工具</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="https://paperswithcode.com" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon ai">📄</div>
+                        <div class="card-info">
+                            <h3 class="card-title">Papers With Code</h3>
+                            <span class="card-url">paperswithcode.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">论文与代码对应平台，最新研究进展、开源实现、基准测试。</p>
+                    <div class="card-tags">
+                        <span class="tag">论文</span>
+                        <span class="tag">开源代码</span>
+                        <span class="tag">SOTA</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="https://github.com/apachecn" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon ai">�</div>
+                        <div class="card-info">
+                            <h3 class="card-title">ApacheCN</h3>
+                            <span class="card-url">github.com/apachecn</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">开源翻译社区，机器学习、深度学习经典书籍中文翻译。</p>
+                    <div class="card-tags">
+                        <span class="tag">开源翻译</span>
+                        <span class="tag">电子书</span>
+                        <span class="tag">免费</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">🎮</div>
+                <h2 class="section-title">游戏开发学习</h2>
+                <span class="section-count">8 网站</span>
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <a href="https://learn.u3d.cn" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon game">🎯</div>
+                        <div class="card-info">
+                            <h3 class="card-title">Unity 官方中文课堂</h3>
+                            <span class="card-url">learn.u3d.cn</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">Unity官方中文学习平台，从入门到精通的系统课程和实战项目。</p>
+                    <div class="card-tags">
+                        <span class="tag">官方教程</span>
+                        <span class="tag">中文</span>
+                        <span class="tag">免费</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="https://docs.unrealengine.com/5.3/zh-CN/" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon game">🔷</div>
+                        <div class="card-info">
+                            <h3 class="card-title">虚幻引擎官方文档</h3>
+                            <span class="card-url">docs.unrealengine.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">UE5官方中文文档，蓝图、材质、动画、物理等完整教程。</p>
+                    <div class="card-tags">
+                        <span class="tag">官方文档</span>
+                        <span class="tag">蓝图</span>
+                        <span class="tag">中文</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="https://docs.godotengine.org/zh-cn/4.x/" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon game">🚀</div>
+                        <div class="card-info">
+                            <h3 class="card-title">Godot 官方文档</h3>
+                            <span class="card-url">docs.godotengine.org</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">Godot引擎官方中文文档，入门教程、API参考、最佳实践。</p>
+                    <div class="card-tags">
+                        <span class="tag">官方文档</span>
+                        <span class="tag">开源</span>
+                        <span class="tag">中文</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="https://gameinstitute.qq.com" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon learn">�</div>
+                        <div class="card-info">
+                            <h3 class="card-title">腾讯游戏学堂</h3>
+                            <span class="card-url">gameinstitute.qq.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">腾讯官方游戏开发者社区，技术分享、行业洞察、职业发展。</p>
+                    <div class="card-tags">
+                        <span class="tag">技术分享</span>
+                        <span class="tag">行业洞察</span>
+                        <span class="tag">免费</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="https://indienova.com" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon game">🎮</div>
+                        <div class="card-info">
+                            <h3 class="card-title">indienova</h3>
+                            <span class="card-url">indienova.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">独立游戏社区，开发日志、Game Jam、游戏评测、设计讨论。</p>
+                    <div class="card-tags">
+                        <span class="tag">独立游戏</span>
+                        <span class="tag">社区</span>
+                        <span class="tag">Game Jam</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="https://www.gameres.com" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon learn">📖</div>
+                        <div class="card-info">
+                            <h3 class="card-title">游资网</h3>
+                            <span class="card-url">gameres.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">游戏开发者社区，策划、程序、美术、运营经验分享。</p>
+                    <div class="card-tags">
+                        <span class="tag">开发者社区</span>
+                        <span class="tag">经验分享</span>
+                        <span class="tag">中文</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="https://catlikecoding.com/unity/tutorials/" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon learn">�</div>
+                        <div class="card-info">
+                            <h3 class="card-title">Catlike Coding</h3>
+                            <span class="card-url">catlikecoding.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">高质量Unity教程，数学、渲染、程序化生成等进阶内容。</p>
+                    <div class="card-tags">
+                        <span class="tag">进阶教程</span>
+                        <span class="tag">数学</span>
+                        <span class="tag">渲染</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="https://www.raywenderlich.com" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon learn">�</div>
+                        <div class="card-info">
+                            <h3 class="card-title">Kodeco</h3>
+                            <span class="card-url">kodeco.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">高质量编程教程平台，Unity、Unreal、移动游戏开发课程。</p>
+                    <div class="card-tags">
+                        <span class="tag">视频教程</span>
+                        <span class="tag">多平台</span>
+                        <span class="tag">英文</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">🎨</div>
+                <h2 class="section-title">免费图片素材</h2>
+                <span class="section-count">6 网站</span>
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <a href="https://www.pexels.com/zh-cn/" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon art">📷</div>
+                        <div class="card-info">
+                            <h3 class="card-title">Pexels</h3>
+                            <span class="card-url">pexels.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">高质量免费图片和视频素材，支持中文搜索，可商用无需署名。</p>
+                    <div class="card-tags">
+                        <span class="tag">图片</span>
+                        <span class="tag">视频</span>
+                        <span class="tag">可商用</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="https://unsplash.com" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon art">🖼️</div>
+                        <div class="card-info">
+                            <h3 class="card-title">Unsplash</h3>
+                            <span class="card-url">unsplash.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">全球最大的免费高清图片社区，摄影师作品质量极高，风格多样。</p>
+                    <div class="card-tags">
+                        <span class="tag">高清图片</span>
+                        <span class="tag">摄影</span>
+                        <span class="tag">免费</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="https://pixabay.com/zh/" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon art">🌄</div>
+                        <div class="card-info">
+                            <h3 class="card-title">Pixabay</h3>
+                            <span class="card-url">pixabay.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">免费图片、矢量图、插画、视频素材库，支持中文，数量庞大。</p>
+                    <div class="card-tags">
+                        <span class="tag">图片</span>
+                        <span class="tag">矢量</span>
+                        <span class="tag">视频</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="https://www.freepik.com" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon art">✨</div>
+                        <div class="card-info">
+                            <h3 class="card-title">Freepik</h3>
+                            <span class="card-url">freepik.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">海量矢量图、PSD、图标资源，设计师必备，部分免费。</p>
+                    <div class="card-tags">
+                        <span class="tag">矢量图</span>
+                        <span class="tag">PSD</span>
+                        <span class="tag">图标</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="https://www.iconfont.cn" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon art">🔷</div>
+                        <div class="card-info">
+                            <h3 class="card-title">iconfont</h3>
+                            <span class="card-url">iconfont.cn</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">阿里旗下图标素材库，海量矢量图标，支持SVG/PNG下载。</p>
+                    <div class="card-tags">
+                        <span class="tag">图标</span>
+                        <span class="tag">矢量</span>
+                        <span class="tag">中文</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="https://www.flaticon.com" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon art">🎯</div>
+                        <div class="card-info">
+                            <h3 class="card-title">Flaticon</h3>
+                            <span class="card-url">flaticon.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">全球最大图标素材库，百万级图标资源，多种格式下载。</p>
+                    <div class="card-tags">
+                        <span class="tag">图标</span>
+                        <span class="tag">矢量</span>
+                        <span class="tag">海量</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">🎵</div>
+                <h2 class="section-title">免费音频素材</h2>
+                <span class="section-count">6 网站</span>
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <a href="https://www.aigei.com" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon audio">🔊</div>
+                        <div class="card-info">
+                            <h3 class="card-title">爱给网</h3>
+                            <span class="card-url">aigei.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">国内最大的免费素材库，音效、配乐、3D模型、视频素材应有尽有。</p>
+                    <div class="card-tags">
+                        <span class="tag">音效</span>
+                        <span class="tag">配乐</span>
+                        <span class="tag">中文</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="https://freepd.com" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon audio">🎼</div>
+                        <div class="card-info">
+                            <h3 class="card-title">FreePD</h3>
+                            <span class="card-url">freepd.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">公共领域音乐素材，完全免费可商用，无需署名，分类清晰。</p>
+                    <div class="card-tags">
+                        <span class="tag">背景音乐</span>
+                        <span class="tag">可商用</span>
+                        <span class="tag">免费</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="https://mixkit.co/free-stock-music/" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon audio">🎹</div>
+                        <div class="card-info">
+                            <h3 class="card-title">Mixkit</h3>
+                            <span class="card-url">mixkit.co</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">免费音乐和音效素材，视频模板，质量高，可商用。</p>
+                    <div class="card-tags">
+                        <span class="tag">音乐</span>
+                        <span class="tag">音效</span>
+                        <span class="tag">视频模板</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="https://freesound.org" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon audio">🎧</div>
+                        <div class="card-info">
+                            <h3 class="card-title">Freesound</h3>
+                            <span class="card-url">freesound.org</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">全球最大的免费音效社区，用户上传分享，种类丰富。</p>
+                    <div class="card-tags">
+                        <span class="tag">音效</span>
+                        <span class="tag">社区</span>
+                        <span class="tag">CC协议</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="https://www.zapsplat.com" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon audio">🎬</div>
+                        <div class="card-info">
+                            <h3 class="card-title">ZapSplat</h3>
+                            <span class="card-url">zapsplat.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">专业音效素材库，超过10万音效，游戏和影视常用。</p>
+                    <div class="card-tags">
+                        <span class="tag">音效</span>
+                        <span class="tag">专业</span>
+                        <span class="tag">海量</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="https://audiolibrary.com.co" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon audio">📻</div>
+                        <div class="card-info">
+                            <h3 class="card-title">Audio Library</h3>
+                            <span class="card-url">audiolibrary.com.co</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">YouTube创作者常用音乐库，免版税音乐，分类详细。</p>
+                    <div class="card-tags">
+                        <span class="tag">背景音乐</span>
+                        <span class="tag">免版税</span>
+                        <span class="tag">YouTube</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">🧊</div>
+                <h2 class="section-title">免费3D模型素材</h2>
+                <span class="section-count">6 网站</span>
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <a href="https://sketchfab.com/feed" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon model">🌐</div>
+                        <div class="card-info">
+                            <h3 class="card-title">Sketchfab</h3>
+                            <span class="card-url">sketchfab.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">全球最大的3D模型社区，支持在线预览，大量免费模型可下载。</p>
+                    <div class="card-tags">
+                        <span class="tag">3D模型</span>
+                        <span class="tag">在线预览</span>
+                        <span class="tag">社区</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="https://www.cgmodel.com" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon model">💎</div>
+                        <div class="card-info">
+                            <h3 class="card-title">CG模型网</h3>
+                            <span class="card-url">cgmodel.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">国内专业3D模型交易平台，部分免费模型，中文友好。</p>
+                    <div class="card-tags">
+                        <span class="tag">3D模型</span>
+                        <span class="tag">中文</span>
+                        <span class="tag">专业</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="https://free3d.com" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon model">🎲</div>
+                        <div class="card-info">
+                            <h3 class="card-title">Free3D</h3>
+                            <span class="card-url">free3d.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">免费3D模型下载站，支持多种格式，游戏角色、场景素材丰富。</p>
+                    <div class="card-tags">
+                        <span class="tag">免费模型</span>
+                        <span class="tag">多格式</span>
+                        <span class="tag">游戏</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="https://www.turbosquid.com" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon model">🏆</div>
+                        <div class="card-info">
+                            <h3 class="card-title">TurboSquid</h3>
+                            <span class="card-url">turbosquid.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">全球顶级3D模型市场，质量极高，部分免费模型可用。</p>
+                    <div class="card-tags">
+                        <span class="tag">高质量</span>
+                        <span class="tag">专业</span>
+                        <span class="tag">多格式</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="https://www.models-resource.com" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon model">🎮</div>
+                        <div class="card-info">
+                            <h3 class="card-title">The Models Resource</h3>
+                            <span class="card-url">models-resource.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">游戏角色模型提取库，经典游戏角色、场景模型资源。</p>
+                    <div class="card-tags">
+                        <span class="tag">游戏模型</span>
+                        <span class="tag">角色</span>
+                        <span class="tag">免费</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="https://quaternius.com" target="_blank" class="card-link">→</a>
+                    <div class="card-header">
+                        <div class="card-icon model">🧩</div>
+                        <div class="card-info">
+                            <h3 class="card-title">Quaternius</h3>
+                            <span class="card-url">quaternius.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">低多边形免费3D模型，风格统一，适合独立游戏开发。</p>
+                    <div class="card-tags">
+                        <span class="tag">低模</span>
+                        <span class="tag">免费</span>
+                        <span class="tag">游戏</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p class="footer-text">Built with <span>♥</span> for learners</p>
+        </footer>
     </div>
 </body>
 </html>

@@ -7,313 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-primary: #fafbfc;
-            --bg-secondary: #ffffff;
-            --bg-card: #ffffff;
-            --accent-mint: #7ecfb3;
-            --accent-peach: #f5a9b8;
-            --accent-lavender: #b8a9c9;
-            --accent-sky: #89c4e1;
-            --accent-lemon: #f7dc6f;
-            --text-primary: #3d4f5f;
-            --text-secondary: #7a8b99;
-            --border-light: rgba(126, 207, 179, 0.3);
-            --shadow-soft: 0 4px 20px rgba(126, 207, 179, 0.1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Noto Sans SC', 'Quicksand', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            min-height: 100vh;
-            position: relative;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 20%, rgba(126, 207, 179, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(184, 169, 201, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(137, 196, 225, 0.05) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .container {
-            position: relative;
-            z-index: 1;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 50px 20px;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 60px;
-            animation: fadeInDown 0.8s ease-out;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .logo {
-            font-family: 'Quicksand', sans-serif;
-            font-size: clamp(2rem, 5vw, 3rem);
-            font-weight: 700;
-            color: var(--accent-mint);
-            letter-spacing: 3px;
-            margin-bottom: 10px;
-        }
-
-        .logo span {
-            color: var(--accent-lavender);
-        }
-
-        .tagline {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            letter-spacing: 4px;
-        }
-
-        .decoration {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 15px;
-        }
-
-        .decoration span {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-        }
-
-        .decoration span:nth-child(1) { background: var(--accent-mint); }
-        .decoration span:nth-child(2) { background: var(--accent-peach); }
-        .decoration span:nth-child(3) { background: var(--accent-lavender); }
-        .decoration span:nth-child(4) { background: var(--accent-sky); }
-
-        .section {
-            margin-bottom: 50px;
-            animation: fadeInUp 0.8s ease-out;
-            animation-fill-mode: both;
-        }
-
-        .section:nth-child(2) { animation-delay: 0.1s; }
-        .section:nth-child(3) { animation-delay: 0.2s; }
-        .section:nth-child(4) { animation-delay: 0.3s; }
-        .section:nth-child(5) { animation-delay: 0.4s; }
-        .section:nth-child(6) { animation-delay: 0.5s; }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;
-            gap: 12px;
-        }
-
-        .section-icon {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, var(--accent-mint), var(--accent-sky));
-            border-radius: 12px;
-            font-size: 1.2rem;
-        }
-
-        .section-title {
-            font-family: 'Quicksand', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            letter-spacing: 1px;
-        }
-
-        .section-count {
-            font-size: 0.8rem;
-            color: var(--accent-mint);
-            background: rgba(126, 207, 179, 0.15);
-            padding: 4px 12px;
-            border-radius: 15px;
-        }
-
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background: var(--bg-card);
-            border: 1px solid rgba(126, 207, 179, 0.15);
-            border-radius: 16px;
-            padding: 22px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-mint);
-            box-shadow: var(--shadow-soft);
-        }
-
-        .card-header {
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
-            margin-bottom: 12px;
-        }
-
-        .card-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            flex-shrink: 0;
-        }
-
-        .card-icon.ai { background: linear-gradient(135deg, #a8edea, #fed6e3); }
-        .card-icon.game { background: linear-gradient(135deg, #ffecd2, #fcb69f); }
-        .card-icon.tool { background: linear-gradient(135deg, #d299c2, #fef9d7); }
-        .card-icon.learn { background: linear-gradient(135deg, #89f7fe, #66a6ff); }
-        .card-icon.art { background: linear-gradient(135deg, #f5af19, #f12711); }
-        .card-icon.audio { background: linear-gradient(135deg, #11998e, #38ef7d); }
-        .card-icon.model { background: linear-gradient(135deg, #8e2de2, #4a00e0); }
-
-        .card-info {
-            flex: 1;
-        }
-
-        .card-title {
-            font-size: 1.05rem;
-            font-weight: 600;
-            margin-bottom: 3px;
-            color: var(--text-primary);
-        }
-
-        .card-url {
-            font-size: 0.75rem;
-            color: var(--accent-mint);
-            font-family: 'Quicksand', sans-serif;
-        }
-
-        .card-desc {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.6;
-            margin-bottom: 12px;
-        }
-
-        .card-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-
-        .tag {
-            font-size: 0.7rem;
-            padding: 3px 10px;
-            border-radius: 12px;
-            background: rgba(126, 207, 179, 0.1);
-            color: var(--text-secondary);
-            transition: all 0.3s;
-        }
-
-        .card:hover .tag {
-            background: rgba(126, 207, 179, 0.2);
-            color: var(--text-primary);
-        }
-
-        .card-link {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            width: 28px;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-            background: rgba(126, 207, 179, 0.1);
-            color: var(--accent-mint);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-        }
-
-        .card-link:hover {
-            background: var(--accent-mint);
-            color: white;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px 20px;
-            margin-top: 20px;
-        }
-
-        .footer-text {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-        }
-
-        .footer-text span {
-            color: var(--accent-peach);
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 30px 15px;
-            }
-
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .section-header {
-                flex-wrap: wrap;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
@@ -326,6 +20,13 @@
                 <span></span>
                 <span></span>
             </div>
+            <div class="theme-switcher">
+                <button class="theme-btn active" data-theme="light">清新</button>
+                <button class="theme-btn" data-theme="dark">暗黑</button>
+                <button class="theme-btn" data-theme="ocean">海洋</button>
+                <button class="theme-btn" data-theme="forest">森林</button>
+                <button class="theme-btn" data-theme="sunset">日落</button>
+            </div>
         </header>
 
         <section class="section">
@@ -335,10 +36,9 @@
                 <span class="section-count">8 网站</span>
             </div>
             <div class="cards-grid">
-                <div class="card">
-                    <a href="https://www.coursera.org" target="_blank" class="card-link">→</a>
+                <a href="https://www.coursera.org" target="_blank" class="card">
                     <div class="card-header">
-                        <div class="card-icon ai">�</div>
+                        <div class="card-icon ai">🎓</div>
                         <div class="card-info">
                             <h3 class="card-title">Coursera</h3>
                             <span class="card-url">coursera.org</span>
@@ -350,10 +50,9 @@
                         <span class="tag">证书</span>
                         <span class="tag">免费旁听</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://www.bilibili.com/v/knowledge/" target="_blank" class="card-link">→</a>
+                <a href="https://www.bilibili.com/v/knowledge/" target="_blank" class="card">
                     <div class="card-header">
                         <div class="card-icon ai">📺</div>
                         <div class="card-info">
@@ -367,10 +66,9 @@
                         <span class="tag">免费</span>
                         <span class="tag">中文</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://www.zhihu.com/topic/19551275/hot" target="_blank" class="card-link">→</a>
+                <a href="https://www.zhihu.com/topic/19551275/hot" target="_blank" class="card">
                     <div class="card-header">
                         <div class="card-icon ai">💭</div>
                         <div class="card-info">
@@ -384,10 +82,9 @@
                         <span class="tag">行业动态</span>
                         <span class="tag">中文</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://www.jiqizhixin.com" target="_blank" class="card-link">→</a>
+                <a href="https://www.jiqizhixin.com" target="_blank" class="card">
                     <div class="card-header">
                         <div class="card-icon ai">📰</div>
                         <div class="card-info">
@@ -401,10 +98,9 @@
                         <span class="tag">论文解读</span>
                         <span class="tag">产业</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://www.boyuai.com" target="_blank" class="card-link">→</a>
+                <a href="https://www.boyuai.com" target="_blank" class="card">
                     <div class="card-header">
                         <div class="card-icon ai">🧒</div>
                         <div class="card-info">
@@ -418,10 +114,9 @@
                         <span class="tag">实战项目</span>
                         <span class="tag">中文</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://www.showmeai.tech" target="_blank" class="card-link">→</a>
+                <a href="https://www.showmeai.tech" target="_blank" class="card">
                     <div class="card-header">
                         <div class="card-icon ai">📊</div>
                         <div class="card-info">
@@ -435,10 +130,9 @@
                         <span class="tag">学习路线</span>
                         <span class="tag">工具</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://paperswithcode.com" target="_blank" class="card-link">→</a>
+                <a href="https://paperswithcode.com" target="_blank" class="card">
                     <div class="card-header">
                         <div class="card-icon ai">📄</div>
                         <div class="card-info">
@@ -452,12 +146,11 @@
                         <span class="tag">开源代码</span>
                         <span class="tag">SOTA</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://github.com/apachecn" target="_blank" class="card-link">→</a>
+                <a href="https://github.com/apachecn" target="_blank" class="card">
                     <div class="card-header">
-                        <div class="card-icon ai">�</div>
+                        <div class="card-icon ai">📚</div>
                         <div class="card-info">
                             <h3 class="card-title">ApacheCN</h3>
                             <span class="card-url">github.com/apachecn</span>
@@ -469,7 +162,7 @@
                         <span class="tag">电子书</span>
                         <span class="tag">免费</span>
                     </div>
-                </div>
+                </a>
             </div>
         </section>
 
@@ -480,8 +173,7 @@
                 <span class="section-count">8 网站</span>
             </div>
             <div class="cards-grid">
-                <div class="card">
-                    <a href="https://learn.u3d.cn" target="_blank" class="card-link">→</a>
+                <a href="https://learn.u3d.cn" target="_blank" class="card">
                     <div class="card-header">
                         <div class="card-icon game">🎯</div>
                         <div class="card-info">
@@ -495,12 +187,11 @@
                         <span class="tag">中文</span>
                         <span class="tag">免费</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://docs.unrealengine.com/5.3/zh-CN/" target="_blank" class="card-link">→</a>
+                <a href="https://docs.unrealengine.com/5.3/zh-CN/" target="_blank" class="card">
                     <div class="card-header">
-                        <div class="card-icon game">🔷</div>
+                        <div class="card-icon game">�</div>
                         <div class="card-info">
                             <h3 class="card-title">虚幻引擎官方文档</h3>
                             <span class="card-url">docs.unrealengine.com</span>
@@ -512,12 +203,11 @@
                         <span class="tag">蓝图</span>
                         <span class="tag">中文</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://docs.godotengine.org/zh-cn/4.x/" target="_blank" class="card-link">→</a>
+                <a href="https://docs.godotengine.org/zh-cn/4.x/" target="_blank" class="card">
                     <div class="card-header">
-                        <div class="card-icon game">🚀</div>
+                        <div class="card-icon game">�</div>
                         <div class="card-info">
                             <h3 class="card-title">Godot 官方文档</h3>
                             <span class="card-url">docs.godotengine.org</span>
@@ -529,10 +219,9 @@
                         <span class="tag">开源</span>
                         <span class="tag">中文</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://gameinstitute.qq.com" target="_blank" class="card-link">→</a>
+                <a href="https://gameinstitute.qq.com" target="_blank" class="card">
                     <div class="card-header">
                         <div class="card-icon learn">�</div>
                         <div class="card-info">
@@ -546,10 +235,9 @@
                         <span class="tag">行业洞察</span>
                         <span class="tag">免费</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://indienova.com" target="_blank" class="card-link">→</a>
+                <a href="https://indienova.com" target="_blank" class="card">
                     <div class="card-header">
                         <div class="card-icon game">🎮</div>
                         <div class="card-info">
@@ -563,12 +251,11 @@
                         <span class="tag">社区</span>
                         <span class="tag">Game Jam</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://www.gameres.com" target="_blank" class="card-link">→</a>
+                <a href="https://www.gameres.com" target="_blank" class="card">
                     <div class="card-header">
-                        <div class="card-icon learn">📖</div>
+                        <div class="card-icon learn">�</div>
                         <div class="card-info">
                             <h3 class="card-title">游资网</h3>
                             <span class="card-url">gameres.com</span>
@@ -580,10 +267,9 @@
                         <span class="tag">经验分享</span>
                         <span class="tag">中文</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://catlikecoding.com/unity/tutorials/" target="_blank" class="card-link">→</a>
+                <a href="https://catlikecoding.com/unity/tutorials/" target="_blank" class="card">
                     <div class="card-header">
                         <div class="card-icon learn">�</div>
                         <div class="card-info">
@@ -597,12 +283,11 @@
                         <span class="tag">数学</span>
                         <span class="tag">渲染</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://www.raywenderlich.com" target="_blank" class="card-link">→</a>
+                <a href="https://www.raywenderlich.com" target="_blank" class="card">
                     <div class="card-header">
-                        <div class="card-icon learn">�</div>
+                        <div class="card-icon learn">📱</div>
                         <div class="card-info">
                             <h3 class="card-title">Kodeco</h3>
                             <span class="card-url">kodeco.com</span>
@@ -614,7 +299,144 @@
                         <span class="tag">多平台</span>
                         <span class="tag">英文</span>
                     </div>
-                </div>
+                </a>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">🛠️</div>
+                <h2 class="section-title">开发工具</h2>
+                <span class="section-count">8 网站</span>
+            </div>
+            <div class="cards-grid">
+                <a href="https://github.com" target="_blank" class="card">
+                    <div class="card-header">
+                        <div class="card-icon tool">🐙</div>
+                        <div class="card-info">
+                            <h3 class="card-title">GitHub</h3>
+                            <span class="card-url">github.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">全球最大代码托管平台，开源项目聚集地，版本控制必备。</p>
+                    <div class="card-tags">
+                        <span class="tag">代码托管</span>
+                        <span class="tag">开源</span>
+                        <span class="tag">Git</span>
+                    </div>
+                </a>
+
+                <a href="https://gitee.com" target="_blank" class="card">
+                    <div class="card-header">
+                        <div class="card-icon tool">🏠</div>
+                        <div class="card-info">
+                            <h3 class="card-title">Gitee</h3>
+                            <span class="card-url">gitee.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">国内代码托管平台，访问速度快，适合国内团队协作。</p>
+                    <div class="card-tags">
+                        <span class="tag">代码托管</span>
+                        <span class="tag">中文</span>
+                        <span class="tag">国内</span>
+                    </div>
+                </a>
+
+                <a href="https://www.notion.so" target="_blank" class="card">
+                    <div class="card-header">
+                        <div class="card-icon tool">�</div>
+                        <div class="card-info">
+                            <h3 class="card-title">Notion</h3>
+                            <span class="card-url">notion.so</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">全能笔记工具，文档、数据库、看板、Wiki一体化协作。</p>
+                    <div class="card-tags">
+                        <span class="tag">笔记</span>
+                        <span class="tag">协作</span>
+                        <span class="tag">免费</span>
+                    </div>
+                </a>
+
+                <a href="https://www.figma.com" target="_blank" class="card">
+                    <div class="card-header">
+                        <div class="card-icon tool">🎨</div>
+                        <div class="card-info">
+                            <h3 class="card-title">Figma</h3>
+                            <span class="card-url">figma.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">在线协作设计工具，UI/UX设计首选，实时协作。</p>
+                    <div class="card-tags">
+                        <span class="tag">UI设计</span>
+                        <span class="tag">协作</span>
+                        <span class="tag">免费</span>
+                    </div>
+                </a>
+
+                <a href="https://code.visualstudio.com" target="_blank" class="card">
+                    <div class="card-header">
+                        <div class="card-icon tool">💻</div>
+                        <div class="card-info">
+                            <h3 class="card-title">VS Code</h3>
+                            <span class="card-url">code.visualstudio.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">微软免费代码编辑器，插件生态丰富，支持多种语言。</p>
+                    <div class="card-tags">
+                        <span class="tag">编辑器</span>
+                        <span class="tag">免费</span>
+                        <span class="tag">插件</span>
+                    </div>
+                </a>
+
+                <a href="https://www.jetbrains.com" target="_blank" class="card">
+                    <div class="card-header">
+                        <div class="card-icon tool">🧠</div>
+                        <div class="card-info">
+                            <h3 class="card-title">JetBrains</h3>
+                            <span class="card-url">jetbrains.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">专业IDE开发商，PyCharm、IDEA、Rider等开发利器。</p>
+                    <div class="card-tags">
+                        <span class="tag">IDE</span>
+                        <span class="tag">专业</span>
+                        <span class="tag">学生免费</span>
+                    </div>
+                </a>
+
+                <a href="https://www.postman.com" target="_blank" class="card">
+                    <div class="card-header">
+                        <div class="card-icon tool">📮</div>
+                        <div class="card-info">
+                            <h3 class="card-title">Postman</h3>
+                            <span class="card-url">postman.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">API开发测试工具，接口调试、文档生成、团队协作。</p>
+                    <div class="card-tags">
+                        <span class="tag">API测试</span>
+                        <span class="tag">调试</span>
+                        <span class="tag">免费</span>
+                    </div>
+                </a>
+
+                <a href="https://www.docker.com" target="_blank" class="card">
+                    <div class="card-header">
+                        <div class="card-icon tool">🐳</div>
+                        <div class="card-info">
+                            <h3 class="card-title">Docker</h3>
+                            <span class="card-url">docker.com</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">容器化部署工具，环境一致性、快速部署、微服务必备。</p>
+                    <div class="card-tags">
+                        <span class="tag">容器</span>
+                        <span class="tag">部署</span>
+                        <span class="tag">DevOps</span>
+                    </div>
+                </a>
             </div>
         </section>
 
@@ -622,11 +444,10 @@
             <div class="section-header">
                 <div class="section-icon">🎨</div>
                 <h2 class="section-title">免费图片素材</h2>
-                <span class="section-count">6 网站</span>
+                <span class="section-count">7 网站</span>
             </div>
             <div class="cards-grid">
-                <div class="card">
-                    <a href="https://www.pexels.com/zh-cn/" target="_blank" class="card-link">→</a>
+                <a href="https://www.pexels.com/zh-cn/" target="_blank" class="card">
                     <div class="card-header">
                         <div class="card-icon art">📷</div>
                         <div class="card-info">
@@ -640,10 +461,9 @@
                         <span class="tag">视频</span>
                         <span class="tag">可商用</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://unsplash.com" target="_blank" class="card-link">→</a>
+                <a href="https://unsplash.com" target="_blank" class="card">
                     <div class="card-header">
                         <div class="card-icon art">🖼️</div>
                         <div class="card-info">
@@ -657,10 +477,9 @@
                         <span class="tag">摄影</span>
                         <span class="tag">免费</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://pixabay.com/zh/" target="_blank" class="card-link">→</a>
+                <a href="https://pixabay.com/zh/" target="_blank" class="card">
                     <div class="card-header">
                         <div class="card-icon art">🌄</div>
                         <div class="card-info">
@@ -674,10 +493,9 @@
                         <span class="tag">矢量</span>
                         <span class="tag">视频</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://www.freepik.com" target="_blank" class="card-link">→</a>
+                <a href="https://www.freepik.com" target="_blank" class="card">
                     <div class="card-header">
                         <div class="card-icon art">✨</div>
                         <div class="card-info">
@@ -691,10 +509,9 @@
                         <span class="tag">PSD</span>
                         <span class="tag">图标</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://www.iconfont.cn" target="_blank" class="card-link">→</a>
+                <a href="https://www.iconfont.cn" target="_blank" class="card">
                     <div class="card-header">
                         <div class="card-icon art">🔷</div>
                         <div class="card-info">
@@ -708,10 +525,9 @@
                         <span class="tag">矢量</span>
                         <span class="tag">中文</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://www.flaticon.com" target="_blank" class="card-link">→</a>
+                <a href="https://www.flaticon.com" target="_blank" class="card">
                     <div class="card-header">
                         <div class="card-icon art">🎯</div>
                         <div class="card-info">
@@ -725,7 +541,23 @@
                         <span class="tag">矢量</span>
                         <span class="tag">海量</span>
                     </div>
-                </div>
+                </a>
+
+                <a href="https://kenney.nl/assets" target="_blank" class="card">
+                    <div class="card-header">
+                        <div class="card-icon art">🎮</div>
+                        <div class="card-info">
+                            <h3 class="card-title">Kenney</h3>
+                            <span class="card-url">kenney.nl</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">超全免费游戏素材，2D/3D图形、UI、音效、字体，CC0协议可商用。</p>
+                    <div class="card-tags">
+                        <span class="tag">游戏素材</span>
+                        <span class="tag">2D/3D</span>
+                        <span class="tag">CC0</span>
+                    </div>
+                </a>
             </div>
         </section>
 
@@ -736,8 +568,7 @@
                 <span class="section-count">6 网站</span>
             </div>
             <div class="cards-grid">
-                <div class="card">
-                    <a href="https://www.aigei.com" target="_blank" class="card-link">→</a>
+                <a href="https://www.aigei.com" target="_blank" class="card">
                     <div class="card-header">
                         <div class="card-icon audio">🔊</div>
                         <div class="card-info">
@@ -751,10 +582,9 @@
                         <span class="tag">配乐</span>
                         <span class="tag">中文</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://freepd.com" target="_blank" class="card-link">→</a>
+                <a href="https://freepd.com" target="_blank" class="card">
                     <div class="card-header">
                         <div class="card-icon audio">🎼</div>
                         <div class="card-info">
@@ -768,10 +598,9 @@
                         <span class="tag">可商用</span>
                         <span class="tag">免费</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://mixkit.co/free-stock-music/" target="_blank" class="card-link">→</a>
+                <a href="https://mixkit.co/free-stock-music/" target="_blank" class="card">
                     <div class="card-header">
                         <div class="card-icon audio">🎹</div>
                         <div class="card-info">
@@ -785,10 +614,9 @@
                         <span class="tag">音效</span>
                         <span class="tag">视频模板</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://freesound.org" target="_blank" class="card-link">→</a>
+                <a href="https://freesound.org" target="_blank" class="card">
                     <div class="card-header">
                         <div class="card-icon audio">🎧</div>
                         <div class="card-info">
@@ -802,10 +630,9 @@
                         <span class="tag">社区</span>
                         <span class="tag">CC协议</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://www.zapsplat.com" target="_blank" class="card-link">→</a>
+                <a href="https://www.zapsplat.com" target="_blank" class="card">
                     <div class="card-header">
                         <div class="card-icon audio">🎬</div>
                         <div class="card-info">
@@ -819,10 +646,9 @@
                         <span class="tag">专业</span>
                         <span class="tag">海量</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://audiolibrary.com.co" target="_blank" class="card-link">→</a>
+                <a href="https://audiolibrary.com.co" target="_blank" class="card">
                     <div class="card-header">
                         <div class="card-icon audio">📻</div>
                         <div class="card-info">
@@ -836,7 +662,7 @@
                         <span class="tag">免版税</span>
                         <span class="tag">YouTube</span>
                     </div>
-                </div>
+                </a>
             </div>
         </section>
 
@@ -847,8 +673,7 @@
                 <span class="section-count">6 网站</span>
             </div>
             <div class="cards-grid">
-                <div class="card">
-                    <a href="https://sketchfab.com/feed" target="_blank" class="card-link">→</a>
+                <a href="https://sketchfab.com/feed" target="_blank" class="card">
                     <div class="card-header">
                         <div class="card-icon model">🌐</div>
                         <div class="card-info">
@@ -862,10 +687,9 @@
                         <span class="tag">在线预览</span>
                         <span class="tag">社区</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://www.cgmodel.com" target="_blank" class="card-link">→</a>
+                <a href="https://www.cgmodel.com" target="_blank" class="card">
                     <div class="card-header">
                         <div class="card-icon model">💎</div>
                         <div class="card-info">
@@ -879,10 +703,9 @@
                         <span class="tag">中文</span>
                         <span class="tag">专业</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://free3d.com" target="_blank" class="card-link">→</a>
+                <a href="https://free3d.com" target="_blank" class="card">
                     <div class="card-header">
                         <div class="card-icon model">🎲</div>
                         <div class="card-info">
@@ -896,10 +719,9 @@
                         <span class="tag">多格式</span>
                         <span class="tag">游戏</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://www.turbosquid.com" target="_blank" class="card-link">→</a>
+                <a href="https://www.turbosquid.com" target="_blank" class="card">
                     <div class="card-header">
                         <div class="card-icon model">🏆</div>
                         <div class="card-info">
@@ -913,10 +735,9 @@
                         <span class="tag">专业</span>
                         <span class="tag">多格式</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://www.models-resource.com" target="_blank" class="card-link">→</a>
+                <a href="https://www.models-resource.com" target="_blank" class="card">
                     <div class="card-header">
                         <div class="card-icon model">🎮</div>
                         <div class="card-info">
@@ -930,10 +751,9 @@
                         <span class="tag">角色</span>
                         <span class="tag">免费</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
-                    <a href="https://quaternius.com" target="_blank" class="card-link">→</a>
+                <a href="https://quaternius.com" target="_blank" class="card">
                     <div class="card-header">
                         <div class="card-icon model">🧩</div>
                         <div class="card-info">
@@ -947,7 +767,7 @@
                         <span class="tag">免费</span>
                         <span class="tag">游戏</span>
                     </div>
-                </div>
+                </a>
             </div>
         </section>
 
@@ -955,5 +775,33 @@
             <p class="footer-text">Built with <span>♥</span> for learners</p>
         </footer>
     </div>
+
+    <script>
+        const themeBtns = document.querySelectorAll('.theme-btn');
+        
+        const savedTheme = localStorage.getItem('theme');
+        const defaultTheme = savedTheme || 'light';
+        
+        const defaultBtn = document.querySelector(`[data-theme="${defaultTheme}"]`);
+        if (defaultBtn) {
+            defaultBtn.click();
+        }
+        
+        themeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                themeBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const theme = btn.dataset.theme;
+                if (theme === 'light') {
+                    document.documentElement.removeAttribute('data-theme');
+                } else {
+                    document.documentElement.setAttribute('data-theme', theme);
+                }
+                
+                localStorage.setItem('theme', theme);
+            });
+        });
+    </script>
 </body>
 </html>

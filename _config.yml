@@ -1,0 +1,10 @@
+title: My Awesome Blog
+description: A beautiful blog built with Jekyll and GitHub Pages
+baseurl: ""
+url: ""
+
+theme: minima
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag

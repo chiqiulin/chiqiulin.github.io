@@ -1,0 +1,87 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+@import "minima";
+
+// Dark mode styles
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --link-color: #79a8ff;
+    --link-hover-color: #a3c4ff;
+    --border-color: #333;
+    --code-background: #2d2d2d;
+    --header-background: #242424;
+  }
+
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+
+  a {
+    color: var(--link-color);
+  }
+
+  a:hover {
+    color: var(--link-hover-color);
+  }
+
+  .site-header {
+    background-color: var(--header-background);
+    border-bottom-color: var(--border-color);
+  }
+
+  .site-title,
+  .site-title:visited {
+    color: var(--text-color);
+  }
+
+  .page-link {
+    color: var(--text-color);
+  }
+
+  .post-link {
+    color: var(--text-color);
+  }
+
+  .post-meta {
+    color: #888;
+  }
+
+  pre,
+  code {
+    background-color: var(--code-background);
+    color: #f8f8f2;
+  }
+
+  blockquote {
+    border-left-color: var(--border-color);
+    color: #aaa;
+  }
+
+  table {
+    border-color: var(--border-color);
+  }
+
+  th,
+  td {
+    border-color: var(--border-color);
+  }
+
+  .site-footer {
+    background-color: var(--header-background);
+    border-top-color: var(--border-color);
+  }
+
+  .footer-heading {
+    color: var(--text-color);
+  }
+
+  .contact-list a,
+  .social-media-list a {
+    color: var(--link-color);
+  }
+}

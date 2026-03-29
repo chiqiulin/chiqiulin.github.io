@@ -4,84 +4,111 @@
 
 @import "minima";
 
+// Header layout for dark mode toggle
+.site-header .wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dark-mode-toggle {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  transition: transform 0.3s ease;
+}
+
+.dark-mode-toggle:hover {
+  transform: scale(1.2);
+}
+
 // Dark mode styles
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background-color: #1a1a1a;
-    --text-color: #e0e0e0;
-    --link-color: #79a8ff;
-    --link-hover-color: #a3c4ff;
-    --border-color: #333;
-    --code-background: #2d2d2d;
-    --header-background: #242424;
-  }
+body.dark-mode {
+  --background-color: #1a1a1a;
+  --text-color: #e0e0e0;
+  --link-color: #79a8ff;
+  --link-hover-color: #a3c4ff;
+  --border-color: #333;
+  --code-background: #2d2d2d;
+  --header-background: #242424;
+  
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
 
-  body {
-    background-color: var(--background-color);
-    color: var(--text-color);
-  }
+body.dark-mode a {
+  color: var(--link-color);
+}
 
-  a {
-    color: var(--link-color);
-  }
+body.dark-mode a:hover {
+  color: var(--link-hover-color);
+}
 
-  a:hover {
-    color: var(--link-hover-color);
-  }
+body.dark-mode .site-header {
+  background-color: var(--header-background);
+  border-bottom-color: var(--border-color);
+}
 
-  .site-header {
-    background-color: var(--header-background);
-    border-bottom-color: var(--border-color);
-  }
+body.dark-mode .site-title,
+body.dark-mode .site-title:visited {
+  color: var(--text-color);
+}
 
-  .site-title,
-  .site-title:visited {
-    color: var(--text-color);
-  }
+body.dark-mode .page-link {
+  color: var(--text-color);
+}
 
-  .page-link {
-    color: var(--text-color);
-  }
+body.dark-mode .post-link {
+  color: var(--text-color);
+}
 
-  .post-link {
-    color: var(--text-color);
-  }
+body.dark-mode .post-meta {
+  color: #888;
+}
 
-  .post-meta {
-    color: #888;
-  }
+body.dark-mode pre,
+body.dark-mode code {
+  background-color: var(--code-background);
+  color: #f8f8f2;
+}
 
-  pre,
-  code {
-    background-color: var(--code-background);
-    color: #f8f8f2;
-  }
+body.dark-mode blockquote {
+  border-left-color: var(--border-color);
+  color: #aaa;
+}
 
-  blockquote {
-    border-left-color: var(--border-color);
-    color: #aaa;
-  }
+body.dark-mode table {
+  border-color: var(--border-color);
+}
 
-  table {
-    border-color: var(--border-color);
-  }
+body.dark-mode th,
+body.dark-mode td {
+  border-color: var(--border-color);
+}
 
-  th,
-  td {
-    border-color: var(--border-color);
-  }
+body.dark-mode .site-footer {
+  background-color: var(--header-background);
+  border-top-color: var(--border-color);
+}
 
-  .site-footer {
-    background-color: var(--header-background);
-    border-top-color: var(--border-color);
-  }
+body.dark-mode .footer-heading {
+  color: var(--text-color);
+}
 
-  .footer-heading {
-    color: var(--text-color);
-  }
+body.dark-mode .contact-list a,
+body.dark-mode .social-media-list a {
+  color: var(--link-color);
+}
 
-  .contact-list a,
-  .social-media-list a {
-    color: var(--link-color);
-  }
+body.dark-mode .highlight {
+  background-color: var(--code-background);
 }
